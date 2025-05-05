@@ -39,3 +39,7 @@ Build and serve documentation:
 ```bash
 poetry run mkdocs serve
 ```
+
+## Disclaimer
+
+`lawcite` is a tool for converting publicly available Danish legal documents into BibTeX format for use in LaTeX. It does not provide legal advice or interpret legal content. The tool processes and represents data from public sources, such as retsinformation.dk, without modification to the original content. Users are responsible for verifying the accuracy and applicability of the data for their purposes.
