@@ -1,0 +1,23 @@
+site_name: lawcite
+site_description: Tools for working with Danish laws in LaTeX, converting PDF legal documents to BibTeX format.
+site_author: Your Name
+site_url: https://example.com/lawcite
+
+theme:
+  name: material
+  palette:
+    primary: blue
+  features:
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Usage: usage.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
