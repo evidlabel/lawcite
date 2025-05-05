@@ -9,6 +9,12 @@ Convert a PDF from a URL to BibTeX format:
 lawcite pdf2bib https://www.retsinformation.dk/api/pdf/244970
 ```
 
+The link used is on the retsinformation.dk website in the top right corner (right-click and copy link address). 
+![pdflink](assets/pdflink.png)
+
+
+
+
 Use debug mode to save the fetched PDF for inspection:
 ```bash
 lawcite pdf2bib --debug https://www.retsinformation.dk/api/pdf/244970
