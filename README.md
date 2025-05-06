@@ -21,7 +21,11 @@ lawcite pdf2bib https://www.retsinformation.dk/api/pdf/217344
 lawcite pdf2bib --debug https://www.retsinformation.dk/api/pdf/217344
 ```
 
-The `pdf2bib` command processes PDFs with a structure similar to Danish legal documents (e.g., metadata on the first page, chapters, and paragraphs marked by `§`). It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `foraldreansvarslovenp1stk1`). Use `--debug` to save the PDF for troubleshooting.
+The `pdf2bib` command processes PDFs with a structure similar to Danish legal documents (e.g., metadata on the first page, chapters, and paragraphs marked by `§`). 
+
+It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `foraldreansvarslovenp1stk1`). 
+
+Use `--debug` to save the PDF for troubleshooting.
 
 ## Output
 
