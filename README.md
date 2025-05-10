@@ -57,7 +57,7 @@ Example BibTeX output looks like this:
 @article{konkurrenceloven10astk3,
  author = {Erhvervsministeriet},
  date = {2024-11-13},
- journal = {Bekendtgørelse af konkurrencelaven},
+ journal = {Bekendtgørelse af konkurrenceloven},
  publisher = {retsinformation.dk},
  title = {§10a Stk. 3. Ved »samhandelsbetingelser« forstås det til enhver tid gældende grundlag, hvorefter en virksom- hed generelt fastsætter sine priser, rabatter, markedsføringstilskud og gratisydelser samt vilkårene for, at virksomheden vil kunne yde disse økonomiske fordele over for sine handelspartnere.},
  url = {https://www.retsinformation.dk/api/pdf/244970}
@@ -86,7 +86,7 @@ Build and serve documentation:
 poetry run mkdocs serve
 ```
 
-Documentation is automatically built and hosted on GitHub Pages via a GitHub Actions workflow. The hosted documentation is available at `https://<username>.github.io/lawcite/`.
+Documentation is automatically built and hosted on GitHub Pages via a GitHub Actions workflow. The hosted documentation is available at `https://evidlabel.github.io/lawcite/`.
 
 ## Disclaimer
 
