@@ -31,7 +31,9 @@ To process multiple laws listed in `examples/laws.yml` and save them as BibTeX f
 python examples/process_laws.py
 ```
 
-This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law.
+This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law. If a `.bib` file already exists for a law, the script skips downloading and processing it to avoid overwriting existing files.
+
+An example LaTeX document using these `.bib` files is provided in `examples/test.tex`, which demonstrates citing multiple Danish laws.
 
 ### Using BibTeX in LaTeX
 

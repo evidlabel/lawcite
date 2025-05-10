@@ -1,6 +1,7 @@
 site_name: lawcite
 site_description: Tools for translating Danish laws to BibTeX format for citing.
 site_author: evid
+site_url: https://evidlabel.github.io/lawcite/
 repo_url: https://github.com/evidlabel/lawcite
 theme:
   name: material

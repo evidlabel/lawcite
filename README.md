@@ -37,7 +37,9 @@ To process multiple laws listed in `examples/laws.yml` and save them as BibTeX f
 python examples/process_laws.py
 ```
 
-This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law.
+This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law. If a `.bib` file already exists for a law, the script skips downloading and processing it to avoid overwriting existing files.
+
+An example LaTeX document using these `.bib` files is provided in `examples/test.tex`, which demonstrates citing multiple Danish laws.
 
 ## Output
 
@@ -55,7 +57,7 @@ Example BibTeX output looks like this:
 @article{konkurrenceloven10astk3,
  author = {Erhvervsministeriet},
  date = {2024-11-13},
- journal = {Bekendtgørelse af konkurrenceloven},
+ journal = {Bekendtgørelse af konkurrencelaven},
  publisher = {retsinformation.dk},
  title = {§10a Stk. 3. Ved »samhandelsbetingelser« forstås det til enhver tid gældende grundlag, hvorefter en virksom- hed generelt fastsætter sine priser, rabatter, markedsføringstilskud og gratisydelser samt vilkårene for, at virksomheden vil kunne yde disse økonomiske fordele over for sine handelspartnere.},
  url = {https://www.retsinformation.dk/api/pdf/244970}
@@ -83,6 +85,8 @@ Build and serve documentation:
 ```bash
 poetry run mkdocs serve
 ```
+
+Documentation is automatically built and hosted on GitHub Pages via a GitHub Actions workflow. The hosted documentation is available at `https://<username>.github.io/lawcite/`.
 
 ## Disclaimer
 

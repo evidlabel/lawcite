@@ -34,6 +34,11 @@ def main():
             continue
 
         output_filename = f"{name}.bib"
+        output_path = examples_dir / output_filename
+        if output_path.exists():
+            print(f"Skipping {name}: {output_filename} already exists")
+            continue
+
         print(f"Processing {name} from {url}")
         try:
             parse_pdf_to_bibtex(
