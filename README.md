@@ -30,6 +30,15 @@ It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entri
 
 Use `--name` to specify the output BibTeX filename, or it defaults to a cleaned version of the document title. Use `--debug` to save the PDF for troubleshooting.
 
+### Batch Processing
+
+To process multiple laws listed in `examples/laws.yml` and save them as BibTeX files in the `examples` directory, run:
+```bash
+python examples/process_laws.py
+```
+
+This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law.
+
 ## Output
 
 Example BibTeX output looks like this:

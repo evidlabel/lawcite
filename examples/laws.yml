@@ -1,0 +1,17 @@
+
+laws:
+  - name: "konkurrenceloven"
+    url: "https://www.retsinformation.dk/api/pdf/244970"
+  - name: "forældreansvarsloven"
+    url: "https://www.retsinformation.dk/api/pdf/217344"
+  - name: "retssikkerhedsloven"
+    url: "https://www.retsinformation.dk/api/pdf/248072"
+  - name: "retsplejeloven"
+    url: "https://www.retsinformation.dk/api/pdf/245119"
+  - name: "straffeloven"
+    url: "https://www.retsinformation.dk/api/pdf/244983"
+  - name: "barnetslov"
+    url: "https://www.retsinformation.dk/api/pdf/248080"
+  - name: "serviceloven"
+    url: "https://www.retsinformation.dk/api/pdf/248083"
+

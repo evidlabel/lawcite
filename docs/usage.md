@@ -24,6 +24,15 @@ The link used is on the retsinformation.dk website in the top right corner (righ
 
 The `pdf2bib` command expects PDFs with metadata (title, date, ministry) on the first page and paragraphs marked by `§`. It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `konkurrencelovenp9stk2`). Use `--name` to specify the output BibTeX filename, or it defaults to a cleaned version of the document title (e.g., `konkurrenceloven.bib`). Use `--debug` to save the PDF for troubleshooting.
 
+### Batch Processing
+
+To process multiple laws listed in `examples/laws.yml` and save them as BibTeX files in the `examples` directory, run:
+```bash
+python examples/process_laws.py
+```
+
+This script reads the `laws.yml` file and generates `.bib` files (e.g., `examples/konkurrenceloven.bib`) for each law.
+
 ### Using BibTeX in LaTeX
 
 After generating a BibTeX file (e.g., `konkurrenceloven.bib`) with `lawcite pdf2bib --name konkurrenceloven.bib https://www.retsinformation.dk/api/pdf/244970`, you can use it in a LaTeX document to cite sections of the Danish Competition Act (konkurrenceloven). Below is an example LaTeX document:
