@@ -208,33 +208,52 @@ def create_bibtex_entries(
         }
         bib_database.entries.append(entry)
 
-    return bib_database, clean_title
+    return bib_database
 
 
-def save_bibtex(bib_database: bp.bibdatabase.BibDatabase, document_title: str, output_dir: str | None = None) -> None:
+def save_bibtex(
+    bib_database: bp.bibdatabase.BibDatabase,
+    document_title: str,
+    output_filename: str | None = None,
+    output_dir: str | None = None
+) -> None:
     """Save BibTeX entries to a file.
 
     Args:
         bib_database: BibTeX database to save.
-        document_title: Title of the document for generating the output filename.
+        document_title: Title of the document for generating the default output filename.
+        output_filename: Optional specific filename for the BibTeX file.
         output_dir: Optional directory to save the BibTeX file; defaults to current directory.
     """
-    output_filename = f"{document_title}.bib"
+    if output_filename:
+        filename = output_filename
+    else:
+        clean_title = (
+            re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower().split("elseaf")[-1]
+        ).replace("_", "")
+        filename = f"{clean_title}.bib"
+
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-        output_filename = os.path.join(output_dir, output_filename)
+        filename = os.path.join(output_dir, filename)
 
-    with open(output_filename, "w", encoding="utf-8") as bib_file:
+    with open(filename, "w", encoding="utf-8") as bib_file:
         bp.dump(bib_database, bib_file)
-        print(f"Written BibTeX output to {output_filename}")
+        print(f"Written BibTeX output to {filename}")
 
 
-def parse_pdf_to_bibtex(input_url: str, debug: bool = False, output_dir: str | None = None) -> None:
+def parse_pdf_to_bibtex(
+    input_url: str,
+    debug: bool = False,
+    output_filename: str | None = None,
+    output_dir: str | None = None
+) -> None:
     """Convert PDF legal document from a URL to BibTeX format.
 
     Args:
         input_url: URL of the input PDF file or PDF-generating API.
         debug: If True, save fetched PDF to a file for debugging.
+        output_filename: Optional specific filename for the BibTeX file.
         output_dir: Optional directory to save the BibTeX file; defaults to current directory.
 
     Raises:
@@ -247,7 +266,7 @@ def parse_pdf_to_bibtex(input_url: str, debug: bool = False, output_dir: str | N
         pdf, input_url
     )
     paragraph_content = parse_paragraphs(pdf)
-    bib_database, clean_title = create_bibtex_entries(
+    bib_database = create_bibtex_entries(
         paragraph_content, document_title, document_author, document_url, document_date
     )
-    save_bibtex(bib_database, clean_title, output_dir)
+    save_bibtex(bib_database, document_title, output_filename, output_dir)

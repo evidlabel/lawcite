@@ -17,6 +17,9 @@ Activate the virtual environment with `poetry shell` to use the `lawcite` comman
 # Convert PDF from a URL to BibTeX
 lawcite pdf2bib https://www.retsinformation.dk/api/pdf/217344
 
+# Specify output filename
+lawcite pdf2bib --name konkurrenceloven.bib https://www.retsinformation.dk/api/pdf/217344
+
 # Debug mode: Save fetched PDF for inspection
 lawcite pdf2bib --debug https://www.retsinformation.dk/api/pdf/217344
 ```
@@ -25,10 +28,9 @@ The `pdf2bib` command processes PDFs with a structure similar to Danish legal do
 
 It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `foraldreansvarslovenp1stk1`). 
 
-Use `--debug` to save the PDF for troubleshooting.
+Use `--name` to specify the output BibTeX filename, or it defaults to a cleaned version of the document title. Use `--debug` to save the PDF for troubleshooting.
 
 ## Output
-
 
 Example BibTeX output looks like this:
 ```bibtex
@@ -49,15 +51,12 @@ Example BibTeX output looks like this:
  title = {§10a Stk. 3. Ved »samhandelsbetingelser« forstås det til enhver tid gældende grundlag, hvorefter en virksom- hed generelt fastsætter sine priser, rabatter, markedsføringstilskud og gratisydelser samt vilkårene for, at virksomheden vil kunne yde disse økonomiske fordele over for sine handelspartnere.},
  url = {https://www.retsinformation.dk/api/pdf/244970}
 }
-
 ```
 
 Which can be used in LaTeX documents as follows:
 ```latex
 \cite{konkurrenceloven10astk2}
 ```
-
-
 
 ## Development
 
@@ -75,9 +74,6 @@ Build and serve documentation:
 ```bash
 poetry run mkdocs serve
 ```
-
-
-
 
 ## Disclaimer
 

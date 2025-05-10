@@ -70,6 +70,40 @@ def test_pdf2bib_basic(tmp_path, capsys, mock_pdf_content, mock_pdf_reader):
     assert "author = {Erhvervsministeriet}" in bib_content
 
 
+def test_pdf2bib_custom_filename(tmp_path, capsys, mock_pdf_content, mock_pdf_reader):
+    input_url = "https://www.retsinformation.dk/api/pdf/244970"
+    output_file = tmp_path / "custom_konkurrenceloven.bib"
+
+    with (
+        patch("requests.get") as mock_get,
+        patch("lawcite.core.pdf2bib.PdfReader") as mock_reader,
+    ):
+        mock_response = Mock()
+        mock_response.content = mock_pdf_content.read()
+        mock_response.headers = {"Content-Type": "application/pdf"}
+        mock_response.raise_for_status = Mock()
+        mock_get.return_value = mock_response
+
+        mock_reader.return_value = mock_pdf_reader
+
+        pdf2bib.parse_pdf_to_bibtex(
+            input_url,
+            output_filename="custom_konkurrenceloven.bib",
+            output_dir=str(tmp_path),
+        )
+
+    captured = capsys.readouterr()
+    assert f"Loaded PDF content from {input_url}" in captured.out
+    assert f"Written BibTeX output to {output_file}" in captured.out
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        bib_content = f.read()
+    assert "@article{konkurrenceloven9stk1" in bib_content
+    assert "journal = {Bekendtgørelse af konkurrenceloven}" in bib_content
+    assert "author = {Erhvervsministeriet}" in bib_content
+
+
 def test_pdf2bib_dynamic_url(tmp_path, capsys, mock_pdf_content, mock_pdf_reader):
     input_url = "https://www.retsinformation.dk/api/pdf/244970"
     output_file = tmp_path / "konkurrenceloven.bib"

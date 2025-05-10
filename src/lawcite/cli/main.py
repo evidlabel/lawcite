@@ -20,11 +20,15 @@ def main() -> None:
         action="store_true",
         help="Save fetched PDF content to a file for debugging"
     )
+    parser_pdf2bib.add_argument(
+        "--name",
+        help="Specify the output BibTeX filename (e.g., konkurrenceloven.bib)"
+    )
 
     args = parser.parse_args()
 
     if args.command == "pdf2bib":
-        parse_pdf_to_bibtex(args.input_url, debug=args.debug)
+        parse_pdf_to_bibtex(args.input_url, debug=args.debug, output_filename=args.name)
     else:
         parser.print_help()
 
