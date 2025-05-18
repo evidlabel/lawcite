@@ -1,6 +1,6 @@
 # lawcite
 
-Tools for working with Danish laws in LaTeX, converting PDF legal documents to BibTeX format.
+Tools for converting PDF documents to BibTeX format for citing in LaTeX, with support for Danish laws and general documents.
 
 ## Installation
 
@@ -13,22 +13,43 @@ Activate the virtual environment with `poetry shell` to use the `lawcite` comman
 
 ## Usage
 
+### Converting Legal PDFs
+
+Convert a Danish legal PDF to BibTeX:
 ```bash
-# Convert PDF from a URL to BibTeX
-lawcite pdf2bib https://www.retsinformation.dk/api/pdf/217344
-
-# Specify output filename
-lawcite pdf2bib --name konkurrenceloven.bib https://www.retsinformation.dk/api/pdf/217344
-
-# Debug mode: Save fetched PDF for inspection
-lawcite pdf2bib --debug https://www.retsinformation.dk/api/pdf/217344
+lawcite law https://www.retsinformation.dk/api/pdf/244970
 ```
 
-The `pdf2bib` command processes PDFs with a structure similar to Danish legal documents (e.g., metadata on the first page, chapters, and paragraphs marked by `§`). 
+Specify output filename:
+```bash
+lawcite law --name konkurrenceloven.bib https://www.retsinformation.dk/api/pdf/244970
+```
 
-It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `foraldreansvarslovenp1stk1`). 
+Debug mode to save the PDF:
+```bash
+lawcite law --debug https://www.retsinformation.dk/api/pdf/244970
+```
 
-Use `--name` to specify the output BibTeX filename, or it defaults to a cleaned version of the document title. Use `--debug` to save the PDF for troubleshooting.
+The `law` command processes PDFs with a structure similar to Danish legal documents (e.g., metadata on the first page, chapters, and paragraphs marked by `§`). It supports dynamic API URLs (e.g., `retsinformation.dk/api/pdf/`). BibTeX entries use the PDF's title as the `journal`, the ministry as the `author`, and clean keys (e.g., `konkurrencelovenp1stk1`).
+
+### Converting General PDFs
+
+Convert a general PDF to BibTeX, with each paragraph cited individually:
+```bash
+lawcite other https://www.retsinformation.dk/api/pdf/233142
+```
+
+Specify output filename:
+```bash
+lawcite other --name psykologretningslinjer.bib https://www.retsinformation.dk/api/pdf/233142
+```
+
+Debug mode:
+```bash
+lawcite other --debug https://www.retsinformation.dk/api/pdf/233142
+```
+
+The `other` command processes any PDF, splitting content into paragraphs (separated by blank lines) and assigning incremental IDs (e.g., `para1`, `para2`). BibTeX entries use the PDF's title as the `journal`, the extracted author (or 'Unknown Author'), and keys like `psykolognvnetsvejledenderetningslinjer_para1`.
 
 ### Batch Processing
 
@@ -43,9 +64,9 @@ An example LaTeX document using these `.bib` files is provided in `examples/test
 
 ## Output
 
-Example BibTeX output looks like this:
+### Legal PDF Example
 ```bibtex
-@article{konkurrenceloven10astk2,
+@article{konkurrencelovenp10astk2,
  author = {Erhvervsministeriet},
  date = {2024-11-13},
  journal = {Bekendtgørelse af konkurrenceloven},
@@ -53,20 +74,40 @@ Example BibTeX output looks like this:
  title = {§10a Stk. 2. Påbud efter stk. 1 gælder i 2 år fra det tidspunkt, hvor afgørelsen er endelig.},
  url = {https://www.retsinformation.dk/api/pdf/244970}
 }
+```
 
-@article{konkurrenceloven10astk3,
- author = {Erhvervsministeriet},
- date = {2024-11-13},
- journal = {Bekendtgørelse af konkurrenceloven},
- publisher = {retsinformation.dk},
- title = {§10a Stk. 3. Ved »samhandelsbetingelser« forstås det til enhver tid gældende grundlag, hvorefter en virksom- hed generelt fastsætter sine priser, rabatter, markedsføringstilskud og gratisydelser samt vilkårene for, at virksomheden vil kunne yde disse økonomiske fordele over for sine handelspartnere.},
- url = {https://www.retsinformation.dk/api/pdf/244970}
+### General PDF Example
+```bibtex
+@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para1,
+ author = {Social- og Boligministeriet},
+ date = {2022-06-03},
+ journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
+ publisher = {Unknown Publisher},
+ title = {1. Indledning Disse retningslinjer fastsætter principper for autoriserede psykologers arbejde.},
+ url = {https://www.retsinformation.dk/api/pdf/233142}
+}
+@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para2,
+ author = {Social- og Boligministeriet},
+ date = {2022-06-03},
+ journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
+ publisher = {Unknown Publisher},
+ title = {2. Etiske principper Psykologer skal handle i overensstemmelse med etiske standarder.},
+ url = {https://www.retsinformation.dk/api/pdf/233142}
+}
+@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para3,
+ author = {Social- og Boligministeriet},
+ date = {2022-06-03},
+ journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
+ publisher = {Unknown Publisher},
+ title = {3. Fortrolighed Psykologer skal sikre fortrolighed for deres klienter.},
+ url = {https://www.retsinformation.dk/api/pdf/233142}
 }
 ```
 
-Which can be used in LaTeX documents as follows:
+Use in LaTeX documents as follows:
 ```latex
-\cite{konkurrenceloven10astk2}
+\cite{konkurrencelovenp10astk2}
+\cite{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para1}
 ```
 
 ## Development
@@ -90,9 +131,9 @@ Documentation is automatically built and hosted on GitHub Pages via a GitHub Act
 
 ## Disclaimer
 
-`lawcite` is a tool for converting publicly available Danish laws into BibTeX format for use in LaTeX. 
+`lawcite` is a tool for converting PDF documents into BibTeX format for use in LaTeX. 
 
-It does not provide legal advice or interpret legal content. 
+It does not provide legal advice or interpret content. 
 
 The tool processes and represents data from public sources, such as retsinformation.dk, without modification to the original content. 
 
