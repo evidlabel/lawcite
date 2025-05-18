@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import yaml
 from pathlib import Path
-from lawcite.core.pdf2bib import parse_pdf_to_bibtex
+from lawcite.cli.main import process_law_pdf
 
 def main():
     """Process laws from laws.yml and save as BibTeX files in the examples directory."""
@@ -41,10 +41,10 @@ def main():
 
         print(f"Processing {name} from {url}")
         try:
-            parse_pdf_to_bibtex(
+            process_law_pdf(
                 input_url=url,
                 output_filename=output_filename,
-                output_dir=str(examples_dir)
+                debug=False
             )
         except Exception as e:
             print(f"Failed to process {name}: {e}")

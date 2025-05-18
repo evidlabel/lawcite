@@ -1,0 +1,91 @@
+import bibtexparser as bp
+from typing import Dict, Tuple
+import re
+from unidecode import unidecode
+
+def create_law_bibtex(
+    paragraph_content: Dict[Tuple[str, str], str],
+    document_title: str,
+    document_author: str,
+    document_url: str,
+    document_date: str,
+) -> bp.bibdatabase.BibDatabase:
+    """Create BibTeX entries for a legal document.
+
+    Args:
+        paragraph_content: Dictionary of parsed paragraph content.
+        document_title: Title of the document.
+        document_author: Author of the document (ministry).
+        document_url: URL of the document.
+        document_date: Date of the document.
+
+    Returns:
+        BibTeX database with entries.
+    """
+    bib_database = bp.bibdatabase.BibDatabase()
+
+    # Clean title for use in BibTeX ID
+    clean_title = (
+        unidecode(re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower().split("elseaf")[-1])
+    ).replace("_", "")
+
+    for paragraph, section in paragraph_content:
+        # Clean paragraph and section for BibTeX ID
+        clean_para = paragraph.lower().replace("§", "p")
+        clean_section = section.lower().replace("stk. ", "stk").replace(".", "")
+
+        entry = {
+            "ENTRYTYPE": "article",
+            "ID": f"{clean_title}{clean_para}{clean_section}",
+            "author": document_author,
+            "publisher": "retsinformation.dk",
+            "title": f"§{paragraph} {section} "
+            + paragraph_content[(paragraph, section)].replace("\n\n", "\n"),
+            "journal": document_title,
+            "url": document_url,
+            "date": document_date,
+        }
+        bib_database.entries.append(entry)
+
+    return bib_database
+
+def create_general_bibtex(
+    paragraph_content: Dict[str, str],
+    document_title: str,
+    document_author: str,
+    document_url: str,
+    document_date: str,
+) -> bp.bibdatabase.BibDatabase:
+    """Create BibTeX entries for a general document.
+
+    Args:
+        paragraph_content: Dictionary of parsed paragraph content.
+        document_title: Title of the document.
+        document_author: Author of the document.
+        document_url: URL of the document.
+        document_date: Date of the document.
+
+    Returns:
+        BibTeX database with entries.
+    """
+    bib_database = bp.bibdatabase.BibDatabase()
+
+    # Clean title for use in BibTeX ID
+    clean_title = (
+        unidecode(re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower())
+    ).replace("_", "")
+
+    for para_id, content in paragraph_content.items():
+        entry = {
+            "ENTRYTYPE": "article",
+            "ID": f"{clean_title}_{para_id}",
+            "author": document_author,
+            "publisher": "Unknown Publisher",
+            "title": content,
+            "journal": document_title,
+            "url": document_url,
+            "date": document_date,
+        }
+        bib_database.entries.append(entry)
+
+    return bib_database
