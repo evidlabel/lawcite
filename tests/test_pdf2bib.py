@@ -1,7 +1,6 @@
 import pytest
 from unittest.mock import patch, Mock
 from lawcite.cli.main import process_law_pdf, process_general_pdf
-from pypdf import PdfReader
 import io
 
 @pytest.fixture
@@ -100,7 +99,7 @@ def test_process_law_pdf(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader
 
 def test_process_general_pdf(tmp_path, capsys, mock_pdf_content, mock_general_pdf_reader):
     input_url = "https://www.retsinformation.dk/api/pdf/233142"
-    output_file = tmp_path / "psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer.bib"
+    output_file = tmp_path / "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer.bib"
 
     with (
         patch("requests.get") as mock_get,
@@ -123,8 +122,8 @@ def test_process_general_pdf(tmp_path, capsys, mock_pdf_content, mock_general_pd
 
     with open(output_file, "r", encoding="utf-8") as f:
         bib_content = f.read()
-    assert "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para1" in bib_content
-    assert "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para2" in bib_content
-    assert "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para3" in bib_content
+    assert "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para1" in bib_content
+    assert "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para2" in bib_content
+    assert "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para3" in bib_content
     assert "journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer}" in bib_content
     assert "author = {Social- og Boligministeriet}" in bib_content

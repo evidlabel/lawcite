@@ -1,6 +1,6 @@
 [project]
 name = "lawcite"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tools for working with Danish laws in LaTeX"
 authors = [{ name = "evid 210122431+evidlabel@users.noreply.github.com" }]
 requires-python = "~=3.12"

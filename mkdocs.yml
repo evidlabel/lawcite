@@ -6,7 +6,8 @@ repo_url: https://github.com/evidlabel/lawcite
 theme:
   name: material
   palette:
-    primary: blue
+    primary: black
+    scheme: slate
   features:
     - content.code.copy
 

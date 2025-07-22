@@ -1,4 +1,3 @@
-import pytest
 import lawcite
 
 def test_package_import():

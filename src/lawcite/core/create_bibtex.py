@@ -10,18 +10,7 @@ def create_law_bibtex(
     document_url: str,
     document_date: str,
 ) -> bp.bibdatabase.BibDatabase:
-    """Create BibTeX entries for a legal document.
-
-    Args:
-        paragraph_content: Dictionary of parsed paragraph content.
-        document_title: Title of the document.
-        document_author: Author of the document (ministry).
-        document_url: URL of the document.
-        document_date: Date of the document.
-
-    Returns:
-        BibTeX database with entries.
-    """
+    """Create BibTeX entries for a legal document."""
     bib_database = bp.bibdatabase.BibDatabase()
 
     # Clean title for use in BibTeX ID
@@ -31,7 +20,7 @@ def create_law_bibtex(
 
     for paragraph, section in paragraph_content:
         # Clean paragraph and section for BibTeX ID
-        clean_para = paragraph.lower().replace("§", "p")
+        clean_para = "p" + paragraph.lower()
         clean_section = section.lower().replace("stk. ", "stk").replace(".", "")
 
         entry = {
@@ -56,18 +45,7 @@ def create_general_bibtex(
     document_url: str,
     document_date: str,
 ) -> bp.bibdatabase.BibDatabase:
-    """Create BibTeX entries for a general document.
-
-    Args:
-        paragraph_content: Dictionary of parsed paragraph content.
-        document_title: Title of the document.
-        document_author: Author of the document.
-        document_url: URL of the document.
-        document_date: Date of the document.
-
-    Returns:
-        BibTeX database with entries.
-    """
+    """Create BibTeX entries for a general document."""
     bib_database = bp.bibdatabase.BibDatabase()
 
     # Clean title for use in BibTeX ID
