@@ -3,11 +3,12 @@ import re
 from unidecode import unidecode
 import os
 
+
 def save_bibtex(
     bib_database: bp.bibdatabase.BibDatabase,
     document_title: str,
     output_filename: str | None = None,
-    output_dir: str | None = None
+    output_dir: str | None = None,
 ) -> None:
     """Save BibTeX entries to a file.
 
@@ -20,9 +21,13 @@ def save_bibtex(
     if output_filename:
         filename = output_filename
     else:
-        clean_title = (
-            unidecode(re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower().split("elseaf")[-1])
-        ).replace("_", "")
+        title_lower = unidecode(document_title).lower()
+        prefix = "bekendtgoerelse af "
+        if title_lower.startswith(prefix):
+            clean_title = title_lower[len(prefix) :]
+        else:
+            clean_title = title_lower
+        clean_title = re.sub(r"[^a-z0-9]+", "", clean_title)
         filename = f"{clean_title}.bib"
 
     if output_dir:

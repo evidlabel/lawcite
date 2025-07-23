@@ -18,7 +18,8 @@ theme:
 nav:
   - Home: index.md
   - Install: install.md
-  - Usage: usage.md
+  - Use: usage.md
+  - Citing: output.md
 
 markdown_extensions:
   - admonition

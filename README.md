@@ -1,3 +1,5 @@
+![Deploy](https://github.com/evidlabel/lawcite/actions/workflows/test.yml/badge.svg)![Version](https://img.shields.io/github/v/release/evidlabel/lawcite)
+
 # lawcite
 
 Tools for converting PDF documents to BibTeX format for citing in LaTeX, with support for Danish laws and general documents.

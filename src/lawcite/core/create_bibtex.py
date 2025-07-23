@@ -3,6 +3,7 @@ from typing import Dict, Tuple
 import re
 from unidecode import unidecode
 
+
 def create_law_bibtex(
     paragraph_content: Dict[Tuple[str, str], str],
     document_title: str,
@@ -13,10 +14,13 @@ def create_law_bibtex(
     """Create BibTeX entries for a legal document."""
     bib_database = bp.bibdatabase.BibDatabase()
 
-    # Clean title for use in BibTeX ID
-    clean_title = (
-        unidecode(re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower().split("elseaf")[-1])
-    ).replace("_", "")
+    title_lower = unidecode(document_title).lower()
+    prefix = "bekendtgoerelse af "
+    if title_lower.startswith(prefix):
+        clean_title = title_lower[len(prefix) :]
+    else:
+        clean_title = title_lower
+    clean_title = re.sub(r"[^a-z0-9]+", "", clean_title)
 
     for paragraph, section in paragraph_content:
         # Clean paragraph and section for BibTeX ID
@@ -38,6 +42,7 @@ def create_law_bibtex(
 
     return bib_database
 
+
 def create_general_bibtex(
     paragraph_content: Dict[str, str],
     document_title: str,
@@ -50,7 +55,7 @@ def create_general_bibtex(
 
     # Clean title for use in BibTeX ID
     clean_title = (
-        unidecode(re.sub(r"[^a-zA-Z0-9]+", "", document_title).lower())
+        re.sub(r"[^a-z0-9]+", "", unidecode(document_title).lower())
     ).replace("_", "")
 
     for para_id, content in paragraph_content.items():
