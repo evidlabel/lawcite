@@ -63,7 +63,7 @@ def create_general_bibtex(
             "ENTRYTYPE": "article",
             "ID": f"{clean_title}_{para_id}",
             "author": document_author,
-            "publisher": "Unknown Publisher",
+            "publisher": "retsinformation.dk",
             "title": content,
             "journal": document_title,
             "url": document_url,
