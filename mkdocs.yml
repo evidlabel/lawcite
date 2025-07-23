@@ -6,13 +6,20 @@ repo_url: https://github.com/evidlabel/lawcite
 theme:
   name: material
   palette:
-    primary: blue
+    primary: orange
+    scheme: slate
   features:
     - content.code.copy
+  font:
+    text: Ubuntu
+    code: Ubuntu Mono
+
 
 nav:
   - Home: index.md
-  - Usage: usage.md
+  - Install: install.md
+  - Use: usage.md
+  - Citing: output.md
 
 markdown_extensions:
   - admonition

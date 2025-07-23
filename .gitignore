@@ -1,1 +1,5 @@
 *pyc
+*bib
+site/*
+*lock
+test.*
