@@ -5,11 +5,8 @@ Tools for converting PDF documents to BibTeX format for citing in LaTeX, with su
 ## Installation
 
 ```bash
-poetry install
-poetry shell
+uv pip install . 
 ```
-
-Activate the virtual environment with `poetry shell` to use the `lawcite` command.
 
 ## Usage
 
@@ -114,17 +111,12 @@ Use in LaTeX documents as follows:
 
 Run tests:
 ```bash
-poetry run pytest
-```
-
-Format code:
-```bash
-poetry run black .
+uv run pytest
 ```
 
 Build and serve documentation:
 ```bash
-poetry run mkdocs serve
+uv run mkdocs serve
 ```
 
 Documentation is automatically built and hosted on GitHub Pages via a GitHub Actions workflow. The hosted documentation is available at `https://evidlabel.github.io/lawcite/`.
