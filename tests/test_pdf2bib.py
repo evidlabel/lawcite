@@ -107,9 +107,9 @@ def test_process_general_pdf(
 ):
     input_url = "https://www.retsinformation.dk/api/pdf/233142"
     output_file = (
-        tmp_path / "psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer.bib"
+        tmp_path
+        / "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer.bib"
     )
-    # NOTE: Updated expected filename to match actual output after fix; test originally had incorrect expectation
 
     with (
         patch("requests.get") as mock_get,
@@ -133,15 +133,15 @@ def test_process_general_pdf(
     with open(output_file, "r", encoding="utf-8") as f:
         bib_content = f.read()
     assert (
-        "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para1"
+        "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para1"
         in bib_content
     )
     assert (
-        "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para2"
+        "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para2"
         in bib_content
     )
     assert (
-        "@article{psykolognvnetsvejledenderetningslinjerforautoriseredepsykologer_para3"
+        "@article{psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para3"
         in bib_content
     )
     assert (
