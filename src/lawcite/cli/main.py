@@ -72,6 +72,7 @@ law_cmd = command(
         ),
         option(
             flags=["-f", "--file"],
+            dest="output_filename",
             help="Specify the output BibTeX filename (e.g., konkurrenceloven.bib)",
             arg_type=str,
             sort_key=1,
@@ -102,6 +103,7 @@ other_cmd = command(
         ),
         option(
             flags=["-f", "--file"],
+            dest="output_filename",
             help="Specify the output BibTeX filename (e.g., document.bib)",
             arg_type=str,
             sort_key=1,
