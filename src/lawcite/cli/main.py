@@ -11,8 +11,8 @@ from treeparse import cli, command, argument, option
 def process_law_pdf(
     input_url: str,
     debug: bool = False,
-    output_filename: str | None = None,
-    output_dir: str | None = None,
+    output_filename: str = None,
+    output_dir: str = None,
 ) -> None:
     """Process a legal PDF to BibTeX format."""
     pdf = fetch_pdf_content(input_url, debug)
@@ -29,8 +29,8 @@ def process_law_pdf(
 def process_general_pdf(
     input_url: str,
     debug: bool = False,
-    output_filename: str | None = None,
-    output_dir: str | None = None,
+    output_filename: str = None,
+    output_dir: str = None,
 ) -> None:
     """Process a general PDF to BibTeX format."""
     pdf = fetch_pdf_content(input_url, debug)
