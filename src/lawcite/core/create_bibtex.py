@@ -15,7 +15,7 @@ def create_law_bibtex(
     bib_database = bp.bibdatabase.BibDatabase()
 
     title_lower = unidecode(document_title).lower()
-    prefix = "bekendtgoerelse af "
+    prefix = "bekendtgorelse af "
     if title_lower.startswith(prefix):
         clean_title = title_lower[len(prefix) :]
     else:
