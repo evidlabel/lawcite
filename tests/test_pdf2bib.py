@@ -72,7 +72,6 @@ def mock_general_pdf_reader():
     return MockPdfReader()
 
 
-@pytest.mark.skip(reason="unknown failure")
 def test_process_law_pdf(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader):
     input_url = "https://www.retsinformation.dk/api/pdf/244970"
     output_file = tmp_path / "konkurrenceloven.bib"
@@ -103,7 +102,6 @@ def test_process_law_pdf(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader
     assert "author = {Erhvervsministeriet}" in bib_content
 
 
-@pytest.mark.skip(reason="unknown failure")
 def test_process_general_pdf(
     tmp_path, capsys, mock_pdf_content, mock_general_pdf_reader
 ):
