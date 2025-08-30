@@ -2,6 +2,7 @@ from pypdf import PdfReader
 from datetime import datetime
 import re
 
+
 def extract_metadata(pdf: PdfReader, input_url: str) -> tuple[str, str, str, str]:
     """Extract metadata from the PDF.
 
@@ -53,7 +54,9 @@ def extract_metadata(pdf: PdfReader, input_url: str) -> tuple[str, str, str, str
                 document_date = f"{year}-{month}-{day}"
             else:
                 document_date = datetime.now().strftime("%Y-%m-%d")
-                print("Warning: No valid date found in PDF metadata, using current date.")
+                print(
+                    "Warning: No valid date found in PDF metadata, using current date."
+                )
         else:
             document_date = datetime.now().strftime("%Y-%m-%d")
             print("Warning: No date found, using current date.")

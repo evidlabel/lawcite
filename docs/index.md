@@ -5,6 +5,7 @@
 ## Getting Started
 
 To learn how to install and use `lawcite`, see the [Usage](usage.md) page.
+To learn how to use `lawcite` output, see the [Citing](output.md) page.
 
 ## Features
 
