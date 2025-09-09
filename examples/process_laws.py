@@ -3,6 +3,7 @@ import yaml
 from pathlib import Path
 from lawcite.cli.main import process_law_pdf
 
+
 def main():
     """Process laws from laws.yml and save as BibTeX files in the examples directory."""
     # Get the directory of this script (examples/)
@@ -41,13 +42,10 @@ def main():
 
         print(f"Processing {name} from {url}")
         try:
-            process_law_pdf(
-                input_url=url,
-                output_filename=output_filename,
-                debug=False
-            )
+            process_law_pdf(input_url=url, output_filename=output_filename, debug=False)
         except Exception as e:
             print(f"Failed to process {name}: {e}")
+
 
 if __name__ == "__main__":
     main()

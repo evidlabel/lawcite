@@ -4,6 +4,7 @@ from datetime import datetime
 from unidecode import unidecode
 import os
 
+
 def fetch_pdf_content(input_url: str, debug: bool = False) -> PdfReader:
     """Fetch PDF content from a URL.
 

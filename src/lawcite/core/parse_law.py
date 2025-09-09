@@ -2,6 +2,7 @@ from pypdf import PdfReader
 from typing import Dict, Tuple
 import re
 
+
 def parse_law_paragraphs(pdf: PdfReader) -> Dict[Tuple[str, str], str]:
     """Parse paragraphs and subsections from a legal PDF.
 

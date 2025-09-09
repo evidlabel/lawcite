@@ -15,26 +15,23 @@ def create_law_bibtex(
     bib_database = bp.bibdatabase.BibDatabase()
 
     title_lower = unidecode(document_title).lower()
-    prefix = "bekendtgoerelse af "
-    if title_lower.startswith(prefix):
-        clean_title = title_lower[len(prefix) :]
-    else:
-        clean_title = title_lower
-    clean_title = re.sub(r"[^a-z0-9]+", "", clean_title)
+    clean_title = re.sub(r"[^a-z0-9]+", "", title_lower)
 
     for paragraph, section in paragraph_content:
         # Clean paragraph and section for BibTeX ID
-        clean_para = "p" + paragraph.lower()
+        clean_para = "p" + paragraph.lower().replace(" ", "")
         clean_section = section.lower().replace("stk. ", "stk").replace(".", "")
+
+        short_title = f"§{paragraph} {section}"
+        author = f"{document_title.capitalize()} {short_title},"
+        title = paragraph_content[(paragraph, section)]
 
         entry = {
             "ENTRYTYPE": "article",
             "ID": f"{clean_title}{clean_para}{clean_section}",
-            "author": document_author,
-            "publisher": "retsinformation.dk",
-            "title": f"§{paragraph} {section} "
-            + paragraph_content[(paragraph, section)].replace("\n\n", "\n"),
-            "journal": document_title,
+            "author": author,
+            "journal": document_author,
+            "title": title,
             "url": document_url,
             "date": document_date,
         }
@@ -54,18 +51,17 @@ def create_general_bibtex(
     bib_database = bp.bibdatabase.BibDatabase()
 
     # Clean title for use in BibTeX ID
-    clean_title = (
-        re.sub(r"[^a-z0-9]+", "", unidecode(document_title).lower())
-    ).replace("_", "")
+    title_lower = unidecode(document_title).lower()
+    clean_title = re.sub(r"[^a-z0-9]+", "", title_lower)
 
     for para_id, content in paragraph_content.items():
+        author = f"{document_title.capitalize()} Paragraph {para_id},"
         entry = {
             "ENTRYTYPE": "article",
             "ID": f"{clean_title}_{para_id}",
-            "author": document_author,
-            "publisher": "Unknown Publisher",
+            "author": author,
+            "journal": document_author,
             "title": content,
-            "journal": document_title,
             "url": document_url,
             "date": document_date,
         }

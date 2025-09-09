@@ -81,7 +81,7 @@ An example LaTeX document using these `.bib` files is provided in `examples/test
  author = {Social- og Boligministeriet},
  date = {2022-06-03},
  journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
- publisher = {Unknown Publisher},
+ publisher = {retsinformation.dk},
  title = {1. Indledning Disse retningslinjer fastsætter principper for autoriserede psykologers arbejde.},
  url = {https://www.retsinformation.dk/api/pdf/233142}
 }
@@ -89,7 +89,7 @@ An example LaTeX document using these `.bib` files is provided in `examples/test
  author = {Social- og Boligministeriet},
  date = {2022-06-03},
  journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
- publisher = {Unknown Publisher},
+ publisher = {retsinformation.dk},
  title = {2. Etiske principper Psykologer skal handle i overensstemmelse med etiske standarder.},
  url = {https://www.retsinformation.dk/api/pdf/233142}
 }
@@ -97,7 +97,7 @@ An example LaTeX document using these `.bib` files is provided in `examples/test
  author = {Social- og Boligministeriet},
  date = {2022-06-03},
  journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer},
- publisher = {Unknown Publisher},
+ publisher = {retsinformation.dk},
  title = {3. Fortrolighed Psykologer skal sikre fortrolighed for deres klienter.},
  url = {https://www.retsinformation.dk/api/pdf/233142}
 }
