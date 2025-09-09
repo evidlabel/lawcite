@@ -2,6 +2,8 @@ import pytest
 from unittest.mock import patch, Mock
 from lawcite.cli.main import process_law_pdf, process_general_pdf
 import io
+import yaml
+import os
 
 
 @pytest.fixture
@@ -88,7 +90,7 @@ def test_process_law_pdf(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader
 
         mock_reader.return_value = mock_law_pdf_reader
 
-        process_law_pdf(input_url, output_dir=str(tmp_path))
+        process_law_pdf(input_url, output_filename=str(output_file))
 
     captured = capsys.readouterr()
     assert f"Loaded PDF content from {input_url}" in captured.out
@@ -98,8 +100,80 @@ def test_process_law_pdf(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader
     with open(output_file, "r", encoding="utf-8") as f:
         bib_content = f.read()
     assert "@article{konkurrencelovenp9stk2" in bib_content
-    assert "journal = {Bekendtgørelse af konkurrenceloven}" in bib_content
-    assert "author = {Erhvervsministeriet}" in bib_content
+    assert "journal = {Erhvervsministeriet}" in bib_content
+    assert "author = {Konkurrenceloven §9 Stk. 2.,}" in bib_content
+
+
+def test_process_law_yaml(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader):
+    input_url = "https://www.retsinformation.dk/api/pdf/244970"
+    output_file = tmp_path / "konkurrenceloven.yaml"
+
+    with (
+        patch("requests.get") as mock_get,
+        patch("lawcite.core.fetch_pdf.PdfReader") as mock_reader,
+    ):
+        mock_response = Mock()
+        mock_response.content = mock_pdf_content.read()
+        mock_response.headers = {"Content-Type": "application/pdf"}
+        mock_response.raise_for_status = Mock()
+        mock_get.return_value = mock_response
+
+        mock_reader.return_value = mock_law_pdf_reader
+
+        process_law_pdf(input_url, output_filename=str(output_file))
+
+    captured = capsys.readouterr()
+    assert f"Loaded PDF content from {input_url}" in captured.out
+    assert f"Written Hayagriva YAML output to {output_file}" in captured.out
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        yaml_content = yaml.safe_load(f)
+    assert isinstance(yaml_content, dict)
+    assert "konkurrencelovenp9stk1" in yaml_content
+    entry = yaml_content["konkurrencelovenp9stk1"]
+    assert entry["type"] == "Article"
+    assert entry["author"] == ["Konkurrenceloven §9 Stk. 1."]
+    assert entry["publisher"] == "Erhvervsministeriet"
+    assert "Konkurrence- og Forbrugerstyrelsen" in entry["title"]
+    assert entry["url"] == input_url
+    assert entry["date"] == "2024-11-03"
+
+
+def test_process_general_yaml(tmp_path, capsys, mock_pdf_content, mock_general_pdf_reader):
+    input_url = "https://www.retsinformation.dk/api/pdf/233142"
+    output_file = tmp_path / "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer.yaml"
+
+    with (
+        patch("requests.get") as mock_get,
+        patch("lawcite.core.fetch_pdf.PdfReader") as mock_reader,
+    ):
+        mock_response = Mock()
+        mock_response.content = mock_pdf_content.read()
+        mock_response.headers = {"Content-Type": "application/pdf"}
+        mock_response.raise_for_status = Mock()
+        mock_get.return_value = mock_response
+
+        mock_reader.return_value = mock_general_pdf_reader
+
+        process_general_pdf(input_url, output_filename=str(output_file))
+
+    captured = capsys.readouterr()
+    assert f"Loaded PDF content from {input_url}" in captured.out
+    assert f"Written Hayagriva YAML output to {output_file}" in captured.out
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        yaml_content = yaml.safe_load(f)
+    assert isinstance(yaml_content, dict)
+    assert "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para1" in yaml_content
+    entry = yaml_content["psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer_para1"]
+    assert entry["type"] == "Article"
+    assert entry["author"] == ["Psykolognævnets vejledende retningslinjer for autoriserede psykologer Paragraph para1"]
+    assert entry["publisher"] == "Social- og Boligministeriet"
+    assert "Disse retningslinjer" in entry["title"]
+    assert entry["url"] == input_url
+    assert entry["date"] == "2021-06-03"
 
 
 def test_process_general_pdf(
@@ -123,7 +197,7 @@ def test_process_general_pdf(
 
         mock_reader.return_value = mock_general_pdf_reader
 
-        process_general_pdf(input_url, output_dir=str(tmp_path))
+        process_general_pdf(input_url, output_filename=str(output_file))
 
     captured = capsys.readouterr()
     assert f"Loaded PDF content from {input_url}" in captured.out
@@ -145,7 +219,7 @@ def test_process_general_pdf(
         in bib_content
     )
     assert (
-        "journal = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer}"
+        "journal = {Social- og Boligministeriet}"
         in bib_content
     )
-    assert "author = {Social- og Boligministeriet}" in bib_content
+    assert "author = {Psykolognævnets vejledende retningslinjer for autoriserede psykologer Paragraph para1,}" in bib_content
