@@ -12,8 +12,13 @@ uv pip install https://github.com/evidlabel/lawcite.git
 
 ## Usage
 
+
+`lawcite` usage:
 ![Help](docs/assets/help.svg)
 
+Pdf links can be obtained from [retsinformation](https://retsinformation.dk)
+
+![Pdf link](docs/assets/pdflink.png)
 
 ## Disclaimer
 
