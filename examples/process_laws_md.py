@@ -4,7 +4,7 @@ from lawcite.cli.main import process_law_pdf
 
 
 def main():
-    """Process common Danish laws and save as BibTeX files in the examples directory."""
+    """Process common Danish laws and save as Markdown files in the examples directory."""
     # Get the directory of this script (examples/)
     examples_dir = Path(__file__).parent
 
@@ -44,7 +44,7 @@ def main():
     for law in laws:
         name = law["name"]
         url = law["url"]
-        output_filename = f"{name}.bib"
+        output_filename = f"{name}.md"
         output_path = examples_dir / output_filename
         if output_path.exists():
             print(f"Skipping {name}: {output_filename} already exists")

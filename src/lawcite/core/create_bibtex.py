@@ -5,7 +5,7 @@ from unidecode import unidecode
 
 
 def create_law_bibtex(
-    paragraph_content: Dict[Tuple[str, str], str],
+    paragraph_content: Dict[Tuple[str, str, str], str],
     document_title: str,
     document_author: str,
     document_url: str,
@@ -17,14 +17,15 @@ def create_law_bibtex(
     title_lower = unidecode(document_title).lower()
     clean_title = re.sub(r"[^a-z0-9]+", "", title_lower)
 
-    for paragraph, section in paragraph_content:
-        # Clean paragraph and section for BibTeX ID
+    for chapter, paragraph, section in paragraph_content:
+        # Clean chapter, paragraph and section for BibTeX ID
+        clean_chapter = chapter.lower().replace(" ", "")
         clean_para = "p" + paragraph.lower().replace(" ", "")
         clean_section = section.lower().replace("stk. ", "stk").replace(".", "")
 
         short_title = f"§{paragraph} {section}"
         author = f"{document_title.capitalize()} {short_title},"
-        title = paragraph_content[(paragraph, section)]
+        title = paragraph_content[(chapter, paragraph, section)]
 
         entry = {
             "ENTRYTYPE": "article",
