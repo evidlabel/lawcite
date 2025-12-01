@@ -26,6 +26,8 @@ def mock_law_pdf_reader():
                 "LBK nr 1150 af 03/11/2024\n"
                 "Bekendtgørelse af konkurrenceloven\n"
                 "Ministerium: Erhvervsministeriet\n"
+                "Kapitel 1\n"
+                "Indledning\n"
             )
             page2 = MockPage()
             page2.text = (
@@ -140,6 +142,39 @@ def test_process_law_yaml(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reade
     assert entry["date"] == "2024-11-03"
 
 
+def test_process_law_md(tmp_path, capsys, mock_pdf_content, mock_law_pdf_reader):
+    input_url = "https://www.retsinformation.dk/api/pdf/244970"
+    output_file = tmp_path / "konkurrenceloven.md"
+
+    with (
+        patch("requests.get") as mock_get,
+        patch("lawcite.core.fetch_pdf.PdfReader") as mock_reader,
+    ):
+        mock_response = Mock()
+        mock_response.content = mock_pdf_content.read()
+        mock_response.headers = {"Content-Type": "application/pdf"}
+        mock_response.raise_for_status = Mock()
+        mock_get.return_value = mock_response
+
+        mock_reader.return_value = mock_law_pdf_reader
+
+        process_law_pdf(input_url, output_filename=str(output_file))
+
+    captured = capsys.readouterr()
+    assert f"Loaded PDF content from {input_url}" in captured.out
+    assert f"Written Markdown output to {output_file}" in captured.out
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        md_content = f.read()
+    assert "# konkurrenceloven" in md_content
+    assert "## Kapitel 1" in md_content
+    assert "### § 9" in md_content
+    assert "Stk. 1.:" in md_content
+    assert "Stk. 2.:" in md_content
+    assert "Konkurrence- og Forbrugerstyrelsen" in md_content
+
+
 def test_process_general_yaml(tmp_path, capsys, mock_pdf_content, mock_general_pdf_reader):
     input_url = "https://www.retsinformation.dk/api/pdf/233142"
     output_file = tmp_path / "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer.yaml"
@@ -174,6 +209,40 @@ def test_process_general_yaml(tmp_path, capsys, mock_pdf_content, mock_general_p
     assert "Disse retningslinjer" in entry["title"]
     assert entry["url"] == input_url
     assert entry["date"] == "2021-06-03"
+
+
+def test_process_general_md(tmp_path, capsys, mock_pdf_content, mock_general_pdf_reader):
+    input_url = "https://www.retsinformation.dk/api/pdf/233142"
+    output_file = tmp_path / "psykolognaevnetsvejledenderetningslinjerforautoriseredepsykologer.md"
+
+    with (
+        patch("requests.get") as mock_get,
+        patch("lawcite.core.fetch_pdf.PdfReader") as mock_reader,
+    ):
+        mock_response = Mock()
+        mock_response.content = mock_pdf_content.read()
+        mock_response.headers = {"Content-Type": "application/pdf"}
+        mock_response.raise_for_status = Mock()
+        mock_get.return_value = mock_response
+
+        mock_reader.return_value = mock_general_pdf_reader
+
+        process_general_pdf(input_url, output_filename=str(output_file))
+
+    captured = capsys.readouterr()
+    assert f"Loaded PDF content from {input_url}" in captured.out
+    assert f"Written Markdown output to {output_file}" in captured.out
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        md_content = f.read()
+    assert "# Psykolognævnets vejledende retningslinjer for autoriserede psykologer" in md_content
+    assert "### Paragraph 1" in md_content
+    assert "### Paragraph 2" in md_content
+    assert "### Paragraph 3" in md_content
+    assert "Disse retningslinjer" in md_content
+    assert "Psykologer skal handle" in md_content
+    assert "Psykologer skal sikre" in md_content
 
 
 def test_process_general_pdf(

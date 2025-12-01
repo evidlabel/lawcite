@@ -93,7 +93,7 @@ def create_command(
 
 app = cli(
     name="lawcite",
-    help="Tools for converting documents to BibTeX or YAML",
+    help="Tools for converting documents to BibTeX, YAML, or Markdown",
     max_width=120,
     show_types=True,
     show_defaults=True,
@@ -103,17 +103,17 @@ app = cli(
 
 law_cmd = create_command(
     "law",
-    "Convert legal PDF documents from a URL to BibTeX or YAML format",
+    "Convert legal PDF documents from a URL to BibTeX, YAML, or Markdown format",
     parse_law_paragraphs,
-    "e.g., konkurrenceloven.bib or konkurrenceloven.yaml",
+    "e.g., konkurrenceloven.bib, konkurrenceloven.yaml, or konkurrenceloven.md",
 )
 app.commands.append(law_cmd)
 
 other_cmd = create_command(
     "other",
-    "Convert general PDF documents from a URL to BibTeX or YAML format",
+    "Convert general PDF documents from a URL to BibTeX, YAML, or Markdown format",
     parse_general_paragraphs,
-    "e.g., document.bib or document.yaml",
+    "e.g., document.bib, document.yaml, or document.md",
 )
 app.commands.append(other_cmd)
 

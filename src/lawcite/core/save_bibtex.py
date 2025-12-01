@@ -5,6 +5,7 @@ import os
 import yaml
 from typing import Dict
 from .create_bibtex import create_law_bibtex, create_general_bibtex
+from .save_md import save_markdown
 
 
 def save_bibtex(
@@ -15,7 +16,7 @@ def save_bibtex(
     document_date: str,
     output_filename: str = "__temp.bib",
 ) -> None:
-    """Save bibliography entries to a file in BibTeX or Hayagriva YAML format.
+    """Save bibliography entries to a file in BibTeX, YAML, or Markdown format.
 
     Args:
         paragraph_content: Dictionary of paragraph content.
@@ -35,9 +36,13 @@ def save_bibtex(
         entries = {}
         # Paragraph entries
         for key, content in paragraph_content.items():
-            if isinstance(key, tuple):  # Law: (paragraph, section)
-                para_id = f"{law_id}p{key[0].lower().replace(' ', '')}stk{key[1].lower().replace('stk. ', '').replace('.', '')}"
-                short_title = f"§{key[0]} {key[1]}"
+            if isinstance(key, tuple) and len(key) == 3:  # Law: (chapter, paragraph, section)
+                chapter, para, sec = key
+                clean_chapter = chapter.lower().replace(" ", "")
+                clean_para = "p" + para.lower().replace(" ", "")
+                clean_sec = sec.lower().replace("stk. ", "stk").replace(".", "")
+                para_id = f"{law_id}{clean_para}{clean_sec}"
+                short_title = f"§{para} {sec}"
                 author = [f"{document_title.capitalize()} {short_title}"]
             else:  # General: para_id
                 para_id = f"{law_id}_{key}"
@@ -57,9 +62,20 @@ def save_bibtex(
         with open(output_filename, "w", encoding="utf-8") as f:
             yaml.dump(entries, f, default_flow_style=False, allow_unicode=True)
         print(f"Written Hayagriva YAML output to {output_filename}")
+    elif output_filename.endswith('.md'):
+        # Save in Markdown format
+        save_markdown(
+            paragraph_content,
+            document_title,
+            document_author,
+            document_url,
+            document_date,
+            law_id,
+            output_filename,
+        )
     else:
         # Save in BibTeX format
-        if isinstance(paragraph_content, dict) and all(isinstance(k, tuple) for k in paragraph_content):
+        if isinstance(paragraph_content, dict) and all(isinstance(k, tuple) and len(k) == 3 for k in paragraph_content):
             bib_database = create_law_bibtex(paragraph_content, document_title, document_author, document_url, document_date)
         else:
             bib_database = create_general_bibtex(paragraph_content, document_title, document_author, document_url, document_date)

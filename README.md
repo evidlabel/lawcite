@@ -20,6 +20,16 @@ Pdf links can be obtained from [retsinformation](https://retsinformation.dk)
 
 ![Pdf link](docs/assets/pdflink.png)
 
+## Programmatic Example
+
+To download a set of common Danish laws in Markdown format, run:
+
+```bash
+python examples/process_laws_md.py
+```
+
+This will process several laws and save them as `.md` files in the `examples/` directory, skipping any that already exist.
+
 ## Disclaimer
 
 `lawcite` is a tool for converting PDF documents into BibTeX format for use in LaTeX or typst. 
