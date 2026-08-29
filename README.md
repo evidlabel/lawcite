@@ -1,4 +1,4 @@
-![Deploy](https://github.com/evidlabel/lawcite/actions/workflows/test.yml/badge.svg)![Version](https://img.shields.io/github/v/release/evidlabel/lawcite)
+![CI](https://github.com/evidlabel/lawcite/actions/workflows/test.yml/badge.svg)![Version](https://img.shields.io/github/v/release/evidlabel/lawcite)
 
 # lawcite
 

@@ -32,7 +32,7 @@ cfold*
 # examples/: generated law dumps, not test fixtures
 docs/
 examples/
-/CLAUDE.md
+/AGENTS.md
 .vscode/
 .claude/
 clean.sh
