@@ -1,0 +1,38 @@
+*pyc
+.pytest_cache
+__pycache__
+*.lock
+codefold.json
+notes/
+
+# build/test artifacts
+.coverage
+htmlcov/
+pytest.log
+.ruff_cache/
+.venv/
+
+# scratch / tool artifacts
+*.log
+.grk*
+.grok/
+debug_*.pdf
+codefold.*
+cfold*
+*bib
+
+# YAML hygiene: only CI/pre-commit YAMLs are allowed in-tree.
+*.yml
+*.yaml
+!.github/workflows/test.yml
+!.pre-commit-config.yaml
+
+# local dev (this clone; not published)
+# docs/: Fumadocs site
+# examples/: generated law dumps, not test fixtures
+docs/
+examples/
+/CLAUDE.md
+.vscode/
+.claude/
+clean.sh
