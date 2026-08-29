@@ -1,4 +1,4 @@
-![CI](https://github.com/evidlabel/lawcite/actions/workflows/test.yml/badge.svg)![Version](https://img.shields.io/github/v/release/evidlabel/lawcite)
+![CI](https://github.com/evidlabel/lawcite/actions/workflows/test.yml/badge.svg)![Version](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/evidlabel/lawcite/master/pyproject.toml&query=%24.project.version&prefix=v&label=version)![License](https://img.shields.io/badge/license-MIT-blue.svg)![Python](https://img.shields.io/badge/python-3.12-blue.svg)
 
 # lawcite
 
