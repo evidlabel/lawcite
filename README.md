@@ -42,11 +42,6 @@ The output format follows the file extension: `.bib` (BibTeX), `.yaml`
 
 ![Help](assets/help.svg)
 
-PDF links for the `other` command can be obtained from
-[retsinformation](https://retsinformation.dk):
-
-![Pdf link](assets/pdflink.png)
-
 ## Data source & rate limit
 
 Laws come from the third-party `retsinformation-api.dk` structured API, which
