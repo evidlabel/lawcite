@@ -10,7 +10,7 @@ notes/
 htmlcov/
 pytest.log
 .ruff_cache/
-.venv/
+.venv
 
 # scratch / tool artifacts
 *.log
