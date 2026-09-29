@@ -14,7 +14,7 @@ own citable key for use in LaTeX or Typst.
 ## Installation
 
 ```bash
-uv pip install git+https://github.com/evidlabel/lawcite.git
+uv tool install git+https://github.com/evidlabel/lawcite.git
 ```
 
 ## Usage
