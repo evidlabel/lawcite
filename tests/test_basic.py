@@ -2,7 +2,7 @@ import lawcite
 
 
 def test_package_import():
-    assert lawcite.__version__ == "0.2.0"
+    assert lawcite.__version__ == "0.2.1"
 
 
 def test_cli_module_importable():
