@@ -3,6 +3,8 @@ from typing import Dict, Tuple
 import re
 from unidecode import unidecode
 
+from ..save.common import cite_label, section_slug, stk_counts
+
 
 def create_law_bibtex(
     paragraph_content: Dict[Tuple[str, str, str], str],
@@ -17,13 +19,12 @@ def create_law_bibtex(
     title_lower = unidecode(document_title).lower()
     clean_title = re.sub(r"[^a-z0-9]+", "", title_lower)
 
+    counts = stk_counts(paragraph_content)
     for chapter, paragraph, section in paragraph_content:
-        # Clean chapter, paragraph and section for BibTeX ID
-        chapter.lower().replace(" ", "")
         clean_para = "p" + paragraph.lower().replace(" ", "")
-        clean_section = section.lower().replace("stk. ", "stk").replace(".", "")
+        clean_section = section_slug(section)
 
-        short_title = f"§{paragraph} {section}"
+        short_title = cite_label(paragraph, section, counts.get(paragraph, 1))
         author = f"{document_title.capitalize()} {short_title},"
         title = paragraph_content[(chapter, paragraph, section)]
 

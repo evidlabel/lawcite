@@ -157,7 +157,7 @@ def test_process_law_yaml(tmp_path, capsys, mock_law_json):
 
     entry = yaml_content["lbk2024-1150:p9stk1"]
     assert entry["type"] == "Article"
-    assert entry["author"] == ["Konkurrenceloven § 9 Stk. 1."]
+    assert entry["author"] == ["Konkurrenceloven § 9, stk. 1"]
     assert entry["publisher"] == "Erhvervsministeriet"
     assert "Konkurrence- og Forbrugerstyrelsen" in entry["title"]
     assert entry["url"] == "https://www.retsinformation.dk/eli/lta/2024/1150"
@@ -211,7 +211,7 @@ def test_process_law_bib(tmp_path, capsys, mock_law_json):
         bib_content = f.read()
     assert "@article{konkurrencelovenp9stk2" in bib_content
     assert "journal = {Erhvervsministeriet}" in bib_content
-    assert "author = {Konkurrenceloven §9 Stk. 2.,}" in bib_content
+    assert "author = {Konkurrenceloven § 9, stk. 2,}" in bib_content
 
 
 def test_process_law_md(tmp_path, capsys, mock_law_json):
@@ -228,8 +228,8 @@ def test_process_law_md(tmp_path, capsys, mock_law_json):
     assert "# Konkurrenceloven" in md_content
     assert "## Kapitel 1" in md_content
     assert "### § 9" in md_content
-    assert "Stk. 1.:" in md_content
-    assert "Stk. 2.:" in md_content
+    assert "Stk. 1." not in md_content  # the act prints no label on the first stk
+    assert "Stk. 2. " in md_content
 
 
 def test_process_law_pdf_fallback(tmp_path, capsys, mock_law_pdf_reader):

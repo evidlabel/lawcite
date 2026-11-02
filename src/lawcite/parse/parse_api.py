@@ -6,6 +6,7 @@ Markdown writers consume directly. On top of the raw structure it folds
 """
 
 import re
+import sys
 from typing import Dict, Optional, Set, Tuple
 
 # "§ 9.", "§ 15 a." -> "9", "15a"
@@ -77,10 +78,43 @@ def filter_by_selector(
     }
 
 
+def _item_id(raw: str) -> str:
+    """``"1)"`` -> ``"1"``, ``"a)"`` -> ``"a"``: the bare label of a numbered item."""
+    return re.sub(r"[^0-9A-Za-zæøåÆØÅ]", "", raw or "").lower()
+
+
+def item_section(section: str, item: str) -> str:
+    """The section string of one numbered item: ``"Stk. 1. nr. 1"`` or ``"Stk. 1. litra a"``."""
+    kind = "nr." if item.isdigit() else "litra"
+    return f"{section} {kind} {item}"
+
+
+def _numbered(chapter: dict) -> bool:
+    return bool(_CHAPTER_RE.search(chapter.get("chapter_number") or ""))
+
+
+def _body_chapters(chapters: list) -> list:
+    """The chapters of the act itself.
+
+    A consolidated act (LBK) ends with an unnumbered chapter that holds the
+    amending laws' commencement clauses, which restart at § 1. Once the act has
+    numbered chapters, any unnumbered chapter after the last one is dropped.
+    An act with no numbered chapters keeps all of its chapters.
+    """
+    last = max((i for i, ch in enumerate(chapters) if _numbered(ch)), default=-1)
+    if last < 0:
+        return list(chapters)
+    return [ch for i, ch in enumerate(chapters) if i <= last or _numbered(ch)]
+
+
 def parse_law_structure(
     law_json: dict, selector: Optional[Set[str]] = None
 ) -> Dict[Tuple[str, str, str], str]:
     """Walk ``law_json['structure']`` into ``{(chapter, paragraph, stk): text}``.
+
+    Each stk is one entry, with its numbered items folded into the text. Each
+    numbered item is also its own entry, under the section ``"Stk. 1. nr. 1"``.
+    If the same (§, stk) turns up twice, the first is kept and a warning printed.
 
     Args:
         law_json: The full law JSON returned by :func:`lawcite.api.client.get_law`.
@@ -88,9 +122,22 @@ def parse_law_structure(
             keep. ``None`` keeps every paragraph.
     """
     paragraph_content: Dict[Tuple[str, str, str], str] = {}
+    seen: Dict[Tuple[str, str], str] = {}  # (paragraph, section) -> chapter
     structure = law_json.get("structure") or {}
 
-    for chapter in structure.get("chapters") or []:
+    def put(chapter_id: str, para_id: str, section: str, text: str) -> None:
+        where = seen.get((para_id, section))
+        if where is not None:
+            print(
+                f"Warning: § {para_id} {section} appears twice "
+                f"(chapter {where} and chapter {chapter_id or '?'}); keeping the first",
+                file=sys.stderr,
+            )
+            return
+        seen[(para_id, section)] = chapter_id
+        paragraph_content[(chapter_id, para_id, section)] = text
+
+    for chapter in _body_chapters(structure.get("chapters") or []):
         ch_match = _CHAPTER_RE.search(chapter.get("chapter_number") or "")
         chapter_id = ch_match.group(1) if ch_match else "1"
 
@@ -99,7 +146,12 @@ def parse_law_structure(
                 para_id = _norm_para(para.get("number") or "")
                 for stk in para.get("stk") or []:
                     section = (stk.get("number") or "Stk. 1.").strip()
-                    paragraph_content[(chapter_id, para_id, section)] = _fold_litra(stk)
+                    put(chapter_id, para_id, section, _fold_litra(stk))
+                    for litra in stk.get("litra") or []:
+                        item = _item_id(litra.get("number") or "")
+                        text = (litra.get("text") or "").strip()
+                        if item and text:
+                            put(chapter_id, para_id, item_section(section, item), text)
 
     return filter_by_selector(paragraph_content, selector)
 

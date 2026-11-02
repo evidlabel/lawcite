@@ -37,8 +37,9 @@ def test_save_markdown_law(tmp_path):
     assert "# konkurrenceloven" in content
     assert "## Kapitel 1" in content
     assert "### § 9" in content
-    assert "Stk. 1.: Konkurrence- og Forbrugerstyrelsen" in content
-    assert "Stk. 2.: Konkurrence- og Forbrugerstyrelsen" in content
+    assert "\n\nKonkurrence- og Forbrugerstyrelsen kan efter anmeldelse" in content
+    assert "Stk. 1." not in content
+    assert "Stk. 2. Konkurrence- og Forbrugerstyrelsen" in content
 
 
 def test_save_markdown_general(tmp_path):

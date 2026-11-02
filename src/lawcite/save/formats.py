@@ -14,7 +14,14 @@ import yaml
 
 from .. import __version__
 from ..create.create_bibtex import create_general_bibtex, create_law_bibtex
-from .common import ensure_parent_dir, is_law_content
+from .common import (
+    cite_label,
+    ensure_parent_dir,
+    is_law_content,
+    section_slug,
+    split_section,
+    stk_counts,
+)
 
 
 class OutputFormat(Protocol):
@@ -115,13 +122,15 @@ class HayagrivaFormat:
                 "date": document_date,
             }
 
+        counts = stk_counts(paragraph_content) if law else {}
         for key, content in paragraph_content.items():
             if law and isinstance(key, tuple) and len(key) == 3:
                 _chapter, para, sec = key
                 clean_para = "p" + para.lower().replace(" ", "")
-                clean_sec = sec.lower().replace("stk. ", "stk").replace(".", "")
-                para_id = f"{ns}:{clean_para}{clean_sec}"
-                author = [f"{document_title} § {para} {sec}"]
+                para_id = f"{ns}:{clean_para}{section_slug(sec)}"
+                author = [
+                    f"{document_title} {cite_label(para, sec, counts.get(para, 1))}"
+                ]
                 entries[para_id] = {
                     "type": "Article",
                     "title": content,
@@ -186,6 +195,9 @@ class MarkdownFormat:
             current_paragraph = None
             for key in sorted_keys:
                 chapter, paragraph, section = key
+                stk, kind, _item = split_section(section)
+                if kind:  # numbered items are already in their stk's text
+                    continue
                 if chapter != current_chapter:
                     md_content += f"## Kapitel {chapter}\n\n"
                     current_chapter = chapter
@@ -193,7 +205,13 @@ class MarkdownFormat:
                 if paragraph != current_paragraph:
                     md_content += f"### § {paragraph}\n\n"
                     current_paragraph = paragraph
-                md_content += f"{section}: {paragraph_content[key]}\n\n"
+                # The act prints no label on the first stk of a §.
+                label = (
+                    f"Stk. {stk}. "
+                    if stk and stk != "1"
+                    else ("" if stk else f"{section}: ")
+                )
+                md_content += f"{label}{paragraph_content[key]}\n\n"
         else:
             sorted_keys = sorted(
                 paragraph_content.keys(), key=lambda x: int(x.replace("para", ""))

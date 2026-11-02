@@ -2,12 +2,19 @@ from pypdf import PdfReader
 from typing import Dict, Tuple
 import re
 
+# After the act's own text, a consolidated act (LBK) quotes each amending law's
+# commencement clauses ("Lov nr. 347 af 6. juni 1991 ... indeholder følgende
+# ikrafttrædelsesbestemmelse:"), which restart at § 1. Parsing stops there.
+_AMENDING_LAW_RE = re.compile(r"^Lov nr\. \d+ af \d+\.")
+
 
 def parse_law_paragraphs(pdf: PdfReader) -> Dict[Tuple[str, str, str], str]:
     """Parse paragraphs, subsections, and chapters from a legal PDF.
 
     Args:
         pdf: PdfReader object containing the PDF content.
+
+    Parsing stops at the first amending-law note after the act's text.
 
     Returns:
         Dictionary mapping (chapter, paragraph, section) tuples to content strings.
@@ -30,6 +37,9 @@ def parse_law_paragraphs(pdf: PdfReader) -> Dict[Tuple[str, str, str], str]:
             if skip_next:
                 skip_next = False
                 continue
+
+            if current_paragraph and _AMENDING_LAW_RE.match(line):
+                return paragraph_content
 
             # Detect chapter (e.g., "Kapitel 1")
             chapter_match = re.match(r"Kapitel (\d+)", line)

@@ -1,0 +1,311 @@
+{
+ "year": 2014,
+ "number": 433,
+ "eli_uri": "/eli/lta/2014/433",
+ "title": "Bekendtgørelse af forvaltningsloven",
+ "short_name": "LBK nr 433 af 22/04/2014",
+ "popular_title": "Forvaltningsloven",
+ "ministry": "Justitsministeriet",
+ "signature_date": "2014-04-22",
+ "structure": {
+  "chapters": [
+   {
+    "chapter_number": "Kapitel 2",
+    "chapter_title": "Inhabilitet",
+    "afsnit": "",
+    "paragraph_groups": [
+     {
+      "id": "Kap2_X1",
+      "number": "",
+      "heading": "",
+      "paragraphs": [
+       {
+        "id": "Par3",
+        "number": "§ 3.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Den, der virker inden for den offentlige forvaltning, er inhabil i forhold til en bestemt sag, hvis",
+          "litra": [
+           {
+            "number": "1)",
+            "text": "vedkommende selv har en særlig personlig eller økonomisk interesse i sagens udfald eller er eller tidligere i samme sag har været repræsentant for nogen, der har en sådan interesse,"
+           },
+           {
+            "number": "2)",
+            "text": "vedkommendes ægtefælle, beslægtede eller besvogrede i op- eller nedstigende linie eller i sidelinien så nær som søskendebørn eller andre nærstående har en særlig personlig eller økonomisk interesse i sagens udfald eller er repræsentant for nogen, der har en sådan interesse,"
+           },
+           {
+            "number": "3)",
+            "text": "vedkommende deltager i ledelsen af eller i øvrigt har en nær tilknytning til et selskab, en forening eller en anden privat juridisk person, der har en særlig interesse i sagens udfald,"
+           },
+           {
+            "number": "4)",
+            "text": "sagen vedrører klage over eller udøvelse af kontrol- eller tilsynsvirksomhed over for en anden offentlig myndighed, og vedkommende tidligere hos denne myndighed har medvirket ved den afgørelse eller ved gennemførelsen af de foranstaltninger, sagen angår, eller"
+           },
+           {
+            "number": "5)",
+            "text": "der i øvrigt foreligger omstændigheder, som er egnede til at vække tvivl om vedkommendes upartiskhed."
+           }
+          ],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Inhabilitet foreligger dog ikke, hvis der som følge af interessens karakter eller styrke, sagens karakter eller den pågældendes funktioner i forbindelse med sagsbehandlingen ikke kan antages at være fare for, at afgørelsen i sagen vil kunne blive påvirket af uvedkommende hensyn.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 3.",
+          "text": "Den, der er inhabil i forhold til en sag, må ikke træffe afgørelse, deltage i afgørelsen eller i øvrigt medvirke ved behandlingen af den pågældende sag.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "Par4",
+        "number": "§ 4.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Bestemmelserne i § 3 gælder ikke, hvis det ville være umuligt eller forbundet med væsentlige vanskeligheder eller betænkelighed at lade en anden træde i den pågældendes sted under sagens behandling.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "For medlemmer af en kollegial forvaltningsmyndighed gælder bestemmelserne i § 3, selv om en stedfortræder ikke kan indkaldes. Bestemmelsen gælder dog ikke, hvis myndigheden ville miste sin beslutningsdygtighed eller det af hensyn til myndighedens sammensætning ville give anledning til væsentlig betænkelighed, dersom medlemmet ikke kunne deltage i sagens behandling, og behandlingen ikke kan udsættes uden væsentlig skade for offentlige eller private interesser.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 3.",
+          "text": "Ved kollegiale forvaltningsmyndigheders valg af medlemmer til hverv kan et medlem uanset bestemmelserne i § 3 deltage, selv om medlemmet er bragt i forslag. Bestemmelserne i § 3 gælder ikke for regionsråds eller kommunalbestyrelsers beslutninger om vederlag m.v. til medlemmer.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "Par5",
+        "number": "§ 5.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Vedkommende minister kan efter forhandling med justitsministeren for bestemte områder fastsætte regler, der fastlægger den nærmere rækkevidde af bestemmelserne i §§ 3 og 4.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "Par6",
+        "number": "§ 6.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Den, der er bekendt med, at der for den pågældendes vedkommende foreligger forhold, som er nævnt i § 3, stk. 1, skal snarest underrette sin foresatte inden for myndigheden herom, medmindre det er åbenbart, at forholdet er uden betydning. For så vidt angår medlemmer af en kollegial forvaltningsmyndighed gives underretningen til myndigheden.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Spørgsmålet om, hvorvidt en person er inhabil, afgøres af den i stk. 1 nævnte myndighed.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 3.",
+          "text": "Vedkommende må ikke selv deltage i behandlingen og afgørelsen af spørgsmålet om inhabilitet, jfr. dog § 4, stk. 1 og 2. Dette gælder dog ikke på områder, hvor andet er fastsat i henhold til lov.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "chapter_number": "Kapitel 3",
+    "chapter_title": "Vejledning og repræsentation m.v.",
+    "afsnit": "",
+    "paragraph_groups": [
+     {
+      "id": "Kap3_X1",
+      "number": "",
+      "heading": "",
+      "paragraphs": [
+       {
+        "id": "Par7",
+        "number": "§ 7.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "En forvaltningsmyndighed skal i fornødent omfang yde vejledning og bistand til personer, der retter henvendelse om spørgsmål inden for myndighedens sagsområde.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Modtager en forvaltningsmyndighed en skriftlig henvendelse, som ikke vedrører dens sagsområde, videresendes henvendelsen så vidt muligt til rette myndighed.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "Par8",
+        "number": "§ 8.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Den, der er part i en sag, kan på ethvert tidspunkt af sagens behandling lade sig repræsentere eller bistå af andre. Myndigheden kan dog kræve, at parten medvirker personligt, når det er af betydning for sagens afgørelse.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Bestemmelsen i stk. 1, 1. pkt., gælder ikke, hvis partens interesse i at kunne lade sig repræsentere eller bistå findes at burde vige for væsentlige hensyn til offentlige eller private interesser, eller hvor andet er fastsat ved lov.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "chapter_number": "",
+    "chapter_title": "Ændringsbestemmelser",
+    "afsnit": "",
+    "paragraph_groups": [
+     {
+      "id": "",
+      "number": "",
+      "heading": "",
+      "paragraphs": [
+       {
+        "id": "51d4d634-e004-4ec1-9c68-eca2f0f09676",
+        "number": "§ 3.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft den 1. juli 1991.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Loven gælder for dokumenter, der udarbejdes efter lovens ikrafttræden.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "c10baf51-2c85-4292-9aa9-31950c5d1750",
+        "number": "§ 3.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft den 1. juli 2009.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "121f9300-3dcc-416a-b2c2-ce6b7d6fdeb4",
+        "number": "§ 3.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft den 1. januar 2014.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Lovens § 1 og § 2, nr. 2 og 6, finder ikke anvendelse på sager, der behandles efter lov om aktindsigt i miljøoplysninger. I disse sager finder de hidtil gældende regler fortsat anvendelse.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 3.",
+          "text": "Anmodninger om aktindsigt, som er indgivet før lovens ikrafttræden, afgøres efter denne lov.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "99a98ce7-4431-4fda-981e-82b80b1d262a",
+        "number": "§ 4.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft dagen efter bekendtgørelsen i Lovtidende.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "Forvaltningslovens § 9, stk. 4, som affattet ved denne lovs § 3, nr. 1, gælder for dokumenter, der udarbejdes efter lovens ikrafttræden.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "92b1ac1e-0b91-4b9a-b394-b5533189f448",
+        "number": "§ 4.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft dagen efter bekendtgørelsen i Lovtidende, jf. dog stk. 2.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "§§ 2 og 3 træder i kraft den 1. januar 2014.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       },
+       {
+        "id": "96e29411-8c1e-4a19-95d0-fe504d85b857",
+        "number": "§ 7.",
+        "stk": [
+         {
+          "number": "Stk. 1.",
+          "text": "Loven træder i kraft den 15. juni 2009.",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 2.",
+          "text": "(Udelades)",
+          "litra": [],
+          "litra_offset": null
+         },
+         {
+          "number": "Stk. 3.",
+          "text": "Forvaltningslovens § 9, stk. 4, nr. 5, som affattet ved denne lovs § 6, nr. 3, gælder for dokumenter, der udarbejdes efter lovens ikrafttræden.",
+          "litra": [],
+          "litra_offset": null
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
